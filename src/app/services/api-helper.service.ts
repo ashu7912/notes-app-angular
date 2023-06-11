@@ -10,21 +10,19 @@ export class ApiHelperService {
 
   coreApiBaseUrl = '';
 
-  constructor() { 
+  constructor() {
     this.coreApiBaseUrl = environment.coreApiBaseUrl;
   }
 
 
   getCoreApiUrl(urlPath: string) {
-    if (urlPath.startsWith('/')) {
-      return this.coreApiBaseUrl + urlPath.substr(1);
-    } else {
-      return this.coreApiBaseUrl + urlPath;
-    }
+    return this.coreApiBaseUrl + urlPath;
   }
 
   convertToHttpParams(params: any) {
-    const paramsObject = lo_.cloneDeep(params);
-    return new HttpParams({fromObject: paramsObject})
+    if (params) {
+      const paramsObject = lo_.cloneDeep(params);
+      return new HttpParams({ fromObject: paramsObject })
+    }
   }
 }

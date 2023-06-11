@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { CoreApiTypes } from 'src/app/services/api-types';
 import { UserSessionService } from 'src/app/services/user-session.service';
+import { EMAIL_PATTERN } from 'src/app/shared/utilities';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +13,15 @@ import { UserSessionService } from 'src/app/services/user-session.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  emailPattern = /^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z+])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
-  public loginObject = {
-    email: '',
-    password: ''
+  loginForm: FormGroup;
+
+  get email(): FormControl {
+    return <FormControl>this.loginForm.get('email');
   }
-  errorMessage = '';
+
+  get password(): FormControl {
+    return <FormControl>this.loginForm.get('password');
+  }
 
   constructor(
     private userSessionService: UserSessionService,
@@ -25,32 +31,42 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.userSessionService.isTokenAvailable()) {
-      this.router.navigate(['/dashboard'])
+    this.buildLoginForm();
+  }
+
+  buildLoginForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.pattern(EMAIL_PATTERN)]),
+      password: new FormControl('', Validators.required)
+    });
+  }
+
+
+  submitLogin() {
+    if (!this.loginForm.valid) {
+      return;
     }
-  }
-
-  changeInput(event: any) {
-    this.errorMessage = '';
-  }
-
-  login() {
+    const params = { ...this.loginForm.value }
     this.ngxLoader.start()
-    this.userSessionService.userLogIn(this.loginObject)
-    .subscribe((res) => {
-      if(res.status) {
-        this.toastrService.success(res.message);
-        this.router.navigate(this.userSessionService.getDefaultRoute());
-      } else {
-        this.toastrService.error(res.message)
-      }
-    },
-    (err) => {
-      this.toastrService.error(err.message);
-      this.ngxLoader.stop()
-    },
-    () => {
-      this.ngxLoader.stop()
-    })
+    this.userSessionService.userLogIn(params)
+      .subscribe((res: CoreApiTypes.UserWithToken) => {
+        if (res.status) {
+          this.toastrService.success(res.message);
+          this.router.navigate(this.userSessionService.getDefaultRoute());
+        } else {
+          this.toastrService.error(res.message)
+        }
+      },
+        (e) => {
+          this.toastrService.error(e.error.message);
+          this.ngxLoader.stop()
+        },
+        () => {
+          this.ngxLoader.stop()
+        })
+  }
+
+  goToSignup() {
+    this.router.navigate(['/account/signup'])
   }
 }

@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RoleGuard } from '../guards/role.guard';
 import { OuterLayoutComponent } from '../user-layout/outer-layout/outer-layout.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NotesDashboardComponent } from './notes-dashboard/notes-dashboard.component';
 
 const routes: Routes = [
   {
@@ -11,18 +9,8 @@ const routes: Routes = [
     component: OuterLayoutComponent,
     children: [
       {
-        path: 'users-list',
-        component: UserListComponent,
-        canActivate: [RoleGuard]
-      },
-      {
-        path: 'users-profile',
-        component: UserProfileComponent
-      },
-      {
         path: '',
-        redirectTo: 'users-list',
-        pathMatch: 'full'
+        component: NotesDashboardComponent
       }
     ]
   }

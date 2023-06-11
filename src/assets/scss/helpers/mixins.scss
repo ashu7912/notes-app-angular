@@ -52,6 +52,20 @@
   -ms-flex: $values;
 }
 
+@mixin border-solid($px, $type, $color) {
+  border: $px $type $color;
+}
+
+@mixin border-w-clr($bwt,
+$bwr,
+$bwb,
+$bwl,
+$bclr) {
+    border-style: solid;
+    border-width: $bwt $bwr $bwb $bwl;
+    border-color: $bclr;
+}
+
 // row | row-reverse | column | column-reverse
 @mixin flex-direction($direction) {
   flex-direction: $direction;

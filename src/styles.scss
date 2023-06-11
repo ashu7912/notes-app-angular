@@ -5,27 +5,27 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~ngx-toastr/toastr';
 
-.login-bg{
-  background: linear-gradient(45deg, $primary-three 0%, $primary-one 50%, $primary-two 100%);
+body {
+  font-size: 14px;
+}
+.account-bg {
+  // background: linear-gradient(45deg, $primary-three 0%, $primary-one 50%, $primary-two 100%);
 }
 
-.h-100vh{
+.h-100vh {
   height: 100vh;
 }
 
-.text-white{
+.text-white {
   @include fg($white-color);
 }
 
-.text-gray-normal{
+.text-gray-normal {
   @include fg($gray-color-normal);
 }
 
-.text-gray-normal{
-  @include fg($gray-color-normal);
-}
 
-.text-primary-one{
+.text-primary-one {
   @include fg($primary-one)
 }
 
@@ -33,58 +33,68 @@
   @include fg($primary-two)
 }
 
-.fs-14{
+.fs-14 {
   font-size: 14px;
 }
 
-.fs-20{
+.fs-20 {
   font-size: 20px;
 }
 
-.fs-18{
+.fs-18 {
   font-size: 18px;
 }
 
-.fs-24{
+.fs-24 {
   font-size: 24px;
 }
 
-.fs-25{
+.fs-25 {
   font-size: 25px;
 }
 
-.fs-36{
+.fs-36 {
   font-size: 36px;
 }
 
-.fs-54{
+.fs-54 {
   font-size: 54px;
 }
 
-.ls-4{
+.ls-4 {
   letter-spacing: 4px;
 }
 
-.error{
-  text-align: right;
-  font-size: 14px;
-  &-danger{
+.error {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  &-danger {
     @include fg($error-color);
   }
 }
 
-.btn{
-  &-primary{
+.form-group {
+  position: relative;
+}
+
+.btn {
+  &-primary {
     @include btn-var($white-color, $primary-one, $primary-two);
     @include min-width(115px);
   }
-  &-secondary{
+
+  &-secondary {
     @include btn-var($primary-one, $white-color, $primary-two);
     @include min-width(115px);
   }
+  &-icon-center {
+    @include flex-hr-vr-center(center, center);
+  }
 }
 
-.c_pointer{
+.c_pointer {
   cursor: pointer;
 }
 
@@ -97,17 +107,159 @@ textarea {
   @include border-radius(4px);
 
   &:focus {
-    
+
     @include border(solid, 1px, 1px, 1px, 1px, $gray-color-normal);
     @include box-shadow-none;
   }
 
 }
 
- 
+
 
 .modal-w-650 {
   .modal-dialog {
-      max-width: 650px;
+    max-width: 650px;
+  }
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+
+
+.card {
+  &-outer {
+    border: none;
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &-btn {
+    outline: 0;
+    border: 0;
+    @include border-radius(5px);
+    @include bg($sticky-header-bg);
+
+    &-danger {
+      // @include bg(#ffa7a7);
+      // @include fg(#ec9999);
+      @include fg($sticky-btn-fg);
+      &:hover {
+        @include fg(#da0c0c);
+      }
+    }
+    &-success {
+      // @include bg(#ffa7a7);
+      // @include fg(#ec9999);
+      @include fg($sticky-btn-fg);
+      &:hover {
+        @include fg(#2daa03);
+      }
+    }
+
+    &-blue {
+      // @include bg(#a7d4ff);
+      // @include fg(#3f7e9b);
+      @include fg($sticky-btn-fg);
+      &:hover {
+        @include fg(#0093d7);
+      }
+    }
+  }
+
+  &-header {
+    border: none;
+    @include bg($sticky-header-bg);
+    &-title {
+      font-size: 12px;
+      @include fg(#e79302);
+    }
+  }
+
+  &-body {
+    @include bg(#fff1da);
+    &-edit {
+      .form-control {
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .edit-title {
+        font-size: 22px;
+        font-weight: 600;
+      }
+    }
+    &-grid {
+      max-height: 250px;
+      overflow-y: auto;
+    }
+  }
+}
+
+
+// Custom CheckBox -----------------------------------
+.checkbox{
+  &-container {
+    @include font-size(14);
+    display: block;
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  }
+  &-checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    @include border-solid(2px, solid, $grey-light-200);
+    @include border-radius(4px);
+    &-content {
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      height: 20px;
+      width: 20px;
+      display: none;
+      @include bg($white-color);
+    }
+    &:after {
+      content: "";
+      display: none;
+      position: absolute;
+      left: 10px;
+      top: -7px;
+      width: 6px;
+      height: 18px;
+      @include border-w-clr(0px, 2px, 2px, 0px, $primary-one);
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}
+.checkbox-container input:checked ~ {
+  .checkbox-checkmark {
+    @include border-solid(2px, solid, $primary-one);
+    .checkbox-checkmark-content {
+      display: block;
+    }
+    &:after {
+      display: block;
+    }
   }
 }

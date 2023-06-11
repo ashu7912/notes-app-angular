@@ -1,0 +1,64 @@
+
+<div class="login-form-view px-6 py-4 text-center">
+    <form class="login-wrap" [formGroup]="signupForm" (ngSubmit)="submitSignup()">
+        <div class="form-group pb-3">
+            <input formControlName="firstname" class="form-control login-form-input" id="firstname"
+                placeholder="First Name" autocomplete="cc-name"
+                [class.is-invalid]="firstname.touched && firstname.invalid"
+                >
+            <div class="error error-danger mt-2" *ngIf="firstname.touched && firstname.invalid">
+                <div *ngIf="firstname?.errors?.required">Firstname is required</div>
+            </div>
+        </div>
+        <div class="form-group pb-3">
+            <input formControlName="lastname" class="form-control login-form-input" id="lastname"
+                placeholder="First Name" autocomplete="cc-name"
+                [class.is-invalid]="lastname.touched && lastname.invalid"
+                >
+            <div class="error error-danger mt-2" *ngIf="lastname.touched && lastname.invalid">
+                <div *ngIf="lastname?.errors?.required">Lastname is required</div>
+            </div>
+        </div>
+        <div class="form-group pb-3">
+            <input formControlName="email" class="form-control login-form-input" id="email"
+                placeholder="Email address" autocomplete="cc-name"
+                [class.is-invalid]="email.touched && email.invalid"
+                >
+            <div class="error error-danger mt-2" *ngIf="email.touched && email.invalid">
+                <div *ngIf="email?.errors?.required">Email is required</div>
+                <div *ngIf="email?.errors?.pattern">Email is invalid</div>
+            </div>
+        </div>
+        <!-- <div class="form-group pb-3">
+            <input formControlName="email" class="form-control login-form-input" id="email"
+                placeholder="Email address" autocomplete="cc-name">
+            <div class="error error-danger mt-2" *ngIf="email.touched && email.invalid">
+                <div *ngIf="email?.errors?.required">Email is required</div>
+                <div *ngIf="email?.errors?.pattern">Email is invalid</div>
+            </div>
+        </div> -->
+        <div class="form-group pb-3">
+            <input formControlName="password" type="password" class="form-control" id="password"
+                placeholder="Password"
+                [class.is-invalid]="password.touched && password.invalid">
+            <div class="error error-danger mt-2" *ngIf="password.touched && password.invalid">
+                <div *ngIf="password.errors?.required">Password is required</div>
+                <div *ngIf="password.errors?.minLength">Password must be menimum 6 characters</div>
+            </div>
+        </div>
+        <div class="form-group pb-3">
+            <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword"
+                placeholder="Confirm password"
+                [class.is-invalid]="confirmPassword.touched && confirmPassword.invalid">
+            <div class="error error-danger mt-2" *ngIf="confirmPassword.touched && confirmPassword.invalid">
+                <div *ngIf="confirmPassword.errors?.required">Confirmed password is required</div>
+                <div *ngIf="confirmPassword.errors.unMatched">Passwords do not match</div>
+            </div>
+        </div>
+        <i class="divider"></i>
+        <div class="text-right d-flex justify-content-between">
+            <button type="submit" class="btn btn-secondary fs-14">SignUp</button>
+            <a (click)="goToLogin()" href="javascript:;">Back to Login?</a>
+        </div>
+    </form>
+</div>

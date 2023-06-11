@@ -1,0 +1,100 @@
+<div class="container-fluid pt-4">
+  <div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+      <h6 *ngIf="!notesList.length" class="text-gray-normal">No Notes available!</h6>
+      <button class="btn btn-primary fs-14 ml-auto btn-icon-center" (click)="addNote()">Add Note
+        <i class="icon-plus fs-18 pl-1"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row pt-4">
+    <div *ngFor="let note of notesList" class="col-md-3">
+      <div id="notesList">
+        <!-- Single note -->
+        <ng-container>
+          <app-single-note [singleNote]="note" (noteEvent)="noteEvent($event)"></app-single-note>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #editNoteModal let-modal>
+  <form class="login-wrap" [formGroup]="noteForm" (ngSubmit)="saveUpdateNote()">
+    <div class="ann-popup__body text-center mb-0">
+      <div class="card bg-light card-outer">
+        <div class="card-header d-flex">
+          <div *ngIf="editMode" class="card-header-title">
+            Added by -
+            <cite style="font-style: italic;">{{selectedNote.owner}}</cite>
+          </div>
+
+          <div class="card-header-links ml-auto">
+            <button type="submit" class="fs-20 card-btn card-btn-blue mr-2"
+              title="{{!editMode ? 'Save' : 'Update'}} Note">
+              <i class="icon-save"></i>
+            </button>
+            <button (click)="modal.dismiss(false);" type="button" class="fs-20 card-btn card-btn-danger"
+              title="Cancel Save">
+              <i class="icon-x"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body card-body-edit pt-2">
+          <div class="form-group pb-0">
+            <input formControlName="title" class="form-control login-form-input edit-title" id="title"
+              placeholder="Note Title" autocomplete="cc-name" [class.is-invalid]="title.touched && title.invalid">
+            <div class="error error-danger mt-2" *ngIf="title.touched && title.invalid">
+              <div *ngIf="title?.errors?.required">Title is required</div>
+            </div>
+          </div>
+          <div class="form-group mb-0">
+            <textarea formControlName="description" class="form-control login-form-input edit-description"
+              id="description" placeholder="Description" autocomplete="cc-name" rows="5"
+              [class.is-invalid]="description.touched && description.invalid">
+                        </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #confirmDelete let-modal>
+  <div class="modal-body ann-popup__body text-center mb-0">
+    <p class="mb-0 fnts-18">Are you sure you want to delete this note?</p>
+  </div>
+  <div class="modal-footer border-top-0 justify-content-between">
+    <button type="button" class="btn btn-secondary fs-14" (click)="modal.dismiss(false)">No</button>
+    <button type="submit" class="btn btn-primary fs-14" (click)="deleteNote()">Yes</button>
+  </div>
+</ng-template>
+
+<ng-template #assignNoteModal let-modal>
+  <div class="modal-header align-items-center">
+    <h5 class="modal-title generic-modal-title">Share '{{selectedNote.title}}' with...</h5>
+  </div>
+  <div class="modal-body ann-popup__body mb-0">
+    <label class="checkbox-container pt-1">Select All
+      <input type="checkbox" class="checkbox-input" [checked]="noteSelectAll" (change)="checkAllUsers($event)">
+      <span class="checkbox-checkmark">
+        <span class="checkbox-checkmark-content"></span>
+      </span>
+    </label>
+
+    <ng-container *ngFor="let user of otherUsers">
+      <label class="checkbox-container pt-1">{{user.firstname}} {{user.lastname}}
+        <input type="checkbox" class="checkbox-input" [checked]="user.isChecked" (change)="checkUser($event, user)">
+        <span class="checkbox-checkmark">
+          <span class="checkbox-checkmark-content"></span>
+        </span>
+      </label>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 justify-content-between">
+    <button type="button" class="btn btn-secondary fs-14" (click)="modal.dismiss(false)">Cancel</button>
+    <button type="submit" class="btn btn-primary fs-14" (click)="assignNote()">Share</button>
+  </div>
+</ng-template>

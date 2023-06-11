@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiHelperService } from './api-helper.service';
 import { CoreApiTypes } from './api-types';
+import { ResourceService } from './resource.service';
+import { ApiEndpoints, ExtendedEndpoints } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +9,19 @@ import { CoreApiTypes } from './api-types';
 export class UserApiService {
 
   constructor(
-    private http: HttpClient,
-    private apiHelper: ApiHelperService
+    private resourceService: ResourceService<any>
     ) { }
 
 
   authenticate(params: CoreApiTypes.Login) {
-    return this.http.post<any>(this.apiHelper.getCoreApiUrl('/users/login'), params);
+    return this.resourceService.post(ApiEndpoints.users+ExtendedEndpoints.login, params)
   }
 
-  getCurrentUser() {
-    return this.http.get<any>(this.apiHelper.getCoreApiUrl('/users/currentUser'));
+  createUser(params: CoreApiTypes.Login) {
+    return this.resourceService.post(ApiEndpoints.users, params)
   }
-
-  getEmployees(params: CoreApiTypes.GetAllEmployees) {
-    const httpParams = this.apiHelper.convertToHttpParams(params)
-    return this.http.get<any>(this.apiHelper.getCoreApiUrl('/users/get'), {params: httpParams});
-  }
-
-  updateUser(params) {
-    return this.http.post<any>(this.apiHelper.getCoreApiUrl('/users/updateUser'), params);
+  
+  getOtherUsers() {
+    return this.resourceService.get(ApiEndpoints.users)
   }
 }

@@ -1,0 +1,21 @@
+<div (click)="editNote();" class="card bg-light mb-3 card-outer c_pointer" title="Click on note for edit">
+  <div class="card-header d-flex">
+    <div class="card-header-title">
+      Added by - 
+      <cite style="font-style: italic;">{{singleNote.owner}}</cite>
+    </div>
+
+    <div class="card-header-links ml-auto">
+      <button (click)="assignNote();$event.stopPropagation();" class="fs-20 card-btn card-btn-blue mr-2" title="Assign Note to other users">
+        <i class="icon-list"></i>
+      </button>
+      <button (click)="deleteNote();$event.stopPropagation();" class="fs-20 card-btn card-btn-danger" title="Delete Note">
+        <i class="icon-trash-2"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body card-body-grid">
+    <h5 class="card-title">{{singleNote.title}}</h5>
+    <p class="card-text">{{singleNote.description}}</p>
+  </div>
+</div>

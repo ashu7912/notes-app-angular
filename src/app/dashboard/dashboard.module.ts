@@ -2,22 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NotesDashboardComponent } from './notes-dashboard/notes-dashboard.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserProfileComponent
+    NotesDashboardComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
-    TextMaskModule
+    ReactiveFormsModule,
+    TextMaskModule,
+    SharedComponentsModule
   ]
 })
 export class DashboardModule { }

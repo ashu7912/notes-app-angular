@@ -4,6 +4,7 @@
 .app-header {
     @include fg($white-color);
     @include gradient(to right, $primary-one, $primary-two);
+    // @include gradient(to right, #fdc979, $primary-two);
   
     a {
       @include fg($white-color);
@@ -15,5 +16,12 @@
       @include align-items(center);
   
     }
+    .navbar-brand {
+      @include fg($white-color);
+    }
+  }
+
+  .navbar-toggler {
+    border-color: $white-color;
   }
   

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // coreApiBaseUrl: 'https://bridgera-hr-management.herokuapp.com/'
-  coreApiBaseUrl: 'http://localhost:3000/'
+  coreApiBaseUrl: 'https://ashutosh-notes-app.onrender.com'
+  // coreApiBaseUrl: 'http://localhost:3000'
 };
 
 /*

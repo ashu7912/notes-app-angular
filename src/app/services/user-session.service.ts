@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import lo_ from 'lodash';
 import { map } from 'rxjs/operators';
 import { CoreApiTypes } from './api-types';
 import { UserApiService } from './user-api.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AppEventService } from './app.event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,28 +16,9 @@ export class UserSessionService {
 
   constructor(
     private userApiService: UserApiService,
-    private toastrService: ToastrService,
     private router: Router,
-    private appEventService: AppEventService
   ) { }
-
-  /**
-   * 
-   * designationId values - 
-   * 1 - 'CEO/CMO' - Master User
-   * 2 - 'Branch Manager'
-   * 3 - 'Manager'
-   * 4 - 'Employee'
-   */
   
-  /**
-   * 
-   * branchId values - 
-   * 1 - 'Pune' - Head Office
-   * 2 - 'Kolkata' - Branch
-   * 3 - 'Bengaluru' - Branch
-   * 4 - 'Chennai' - Branch
-   */  
 
 
    userLogIn(params: CoreApiTypes.Login) {
@@ -48,35 +26,31 @@ export class UserSessionService {
      .pipe(
        map(res => {
          if (res.status) {
-          this.sessionToken = res.data.authorizationToken;
-          this.setUserData(res.data.currentUser)
+          this.sessionToken = res.token;
+          this.setUserData(res.data)
          }
          return res;
        })
      )
    }
+
+   userSignup(params: CoreApiTypes.Login) {
+    return this.userApiService.createUser(params)
+    .pipe(
+      map(res => {
+        if (res.status) {
+         this.sessionToken = res.token;
+         this.setUserData(res.data)
+        }
+        return res;
+      })
+    )
+  }
    
    getDefaultRoute() {
-    if(this.getDesignationId()!=4) {
-      return ['/dashboard/users-list']
-    }
-    return ['/dashboard/users-profile']
+    return ['/dashboard']
    }
 
-   getCurrentUser() {
-    this.userApiService.getCurrentUser()
-    .subscribe((res) => {
-     if (res.status) {
-      this.setUserData(res.data)
-     } else {
-       this.toastrService.error(res.message)
-     }
-   },
-   (err) => {
-     this.toastrService.error(err.message)
-   })
-   return true;
-  }
 
 
    isTokenAvailable () {
@@ -90,19 +64,10 @@ export class UserSessionService {
 
    setUserData(currentUser) {
     this.loggedInUser = currentUser;
-    this.appEventService.broadcast('loggedInUser', this.loggedInUser);
-    sessionStorage.setItem('userDesignationId', this.loggedInUser.designationId)
-    sessionStorage.setItem('branchId', this.loggedInUser.branchId)
+    sessionStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
    }
    
 
-  getDesignationId() {
-    return +sessionStorage.getItem('userDesignationId')
-  }
-
-  getBranchId() {
-    return +sessionStorage.getItem('branchId')
-  }
    
 
    get sessionToken() {
@@ -123,22 +88,6 @@ export class UserSessionService {
   //      return this.getDefaultRoute();
   //    }
   //  }
-   getDesignation() {
-    switch (this.getDesignationId()) {
-        case 1: {
-            return 'Master User'
-        }
-        case 2: {
-            return 'Branch Manager'
-        }
-        case 3: {
-            return 'Manager'
-        }
-        case 4: {
-            return 'Employee'
-        }
-    }
-}
 
 setUserToView(user) {
   this.userToView = user;

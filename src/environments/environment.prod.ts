@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  coreApiBaseUrl: 'https://bridgera-hr-management.herokuapp.com/'
+  coreApiBaseUrl: 'https://ashutosh-notes-app.onrender.com'
 };
