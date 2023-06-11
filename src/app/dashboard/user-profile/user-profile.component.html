@@ -1,0 +1,316 @@
+<div class="container-fluid bg-gray">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="pt-5 bg-white">
+                <ul class="row m-0 header-section text-primary-one px-1 py-3 align-items-center">
+                    <li class="col-md-4">Profile - {{profileInfo.name}}</li>
+                    <div class="col-md-4" *ngIf="loggedInUser.designationId != 4">
+                        <span class="icon-edit c_pointer fs-25 text-primary-one" (click)="openEditModal()"></span>
+                    </div>
+                    <div class="col-md-4" *ngIf="loggedInUser.designationId != 4">
+                        <button type="button" class="btn btn-secondary fs-14 ml-auto" (click)="backToList()">Back</button>
+                    </div>
+                </ul>
+                <div class="d-flex flex-column justify-content-between">
+                    <div class="pt-3">
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Name
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.name}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Email
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.email}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Mobile
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.mobile}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Address
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.address}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Branch Name
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.branchName}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Designation
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.designation}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Job Title
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.jobTitle}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Joining Date
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.joiningDate}}
+                            </div>
+                        </div>
+                        <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Current Sallary
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.currentSallary}}
+                            </div>
+                        </div>
+                        <!-- <div class="row m-0 py-3">
+                            <div class="col-md-4 d-flex align-items-center text-primary-one">
+                                Promotions
+                            </div>
+                            <div class="col-md-8 d-flex align-items-center fs-14">
+                                {{profileInfo.promotions}}
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<ng-template #editProfileRef let-modal>
+    <div class="modal-header align-items-center">
+        <h4 class="modal-title generic-modal-title">Edit Profile</h4>
+    </div>
+    <div class="modal-body h-calc-240 cscroll">
+        
+        <form action="" ngForm #f="ngForm" (ngSubmit)="f.form.valid && signUp()">
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="userName">Name</label>
+                </div>
+                <div class="col-md-9">
+                    <input 
+                    type="text" 
+                    class="form-control login-form-input" 
+                    id="userName" 
+                    [(ngModel)]="profileInfoEdit.name" 
+                    name="userName" #userName="ngModel"
+                    placeholder="Name"
+                    autocomplete="cc-name"
+                    required
+                    >
+                    <div class="error error-danger mt-2" *ngIf="(userName.touched || f.submitted) && userName.invalid">
+                        <div *ngIf="userName?.errors?.required">Name is Required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="email">Email address</label>
+                </div>
+                <div class="col-md-9">
+                    <input 
+                    type="email" 
+                    class="form-control login-form-input" 
+                    id="email" 
+                    [pattern]="emailPattern"
+                    [(ngModel)]="profileInfoEdit.email" 
+                    name="email" #email="ngModel"
+                    placeholder="Email address"
+                    autocomplete="cc-name"
+                    required
+                    >
+                    <div class="error error-danger mt-2" *ngIf="(email.touched || f.submitted) && email.invalid">
+                        <div *ngIf="email?.errors?.required">Email is required</div>
+                        <div *ngIf="email?.errors?.pattern">Email is invalid</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="mobile">Mobile</label>
+                </div>
+                <div class="col-md-9">
+                    <input 
+                    [textMask]="{mask: cellPattern}"
+                    type="text" 
+                    class="form-control login-form-input" 
+                    id="mobile" 
+                    pattern="^\d{3}-\d{3}-\d{4}$" 
+                    [(ngModel)]="profileInfoEdit.mobile" 
+                    name="mobile" #mobile="ngModel"
+                    placeholder="Mobile"
+                    autocomplete="cc-name"
+                    required
+                    >
+                    <div class="error error-danger mt-2" *ngIf="(mobile.touched || f.submitted) && mobile.invalid">
+                        <div *ngIf="mobile.errors.required">Please enter Mobile Number</div>
+                        <div *ngIf="mobile.errors.pattern">Please enter valid Mobile Number.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="age">Age</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="d-flex align-items-center">
+                        <input 
+                        type="text" 
+                        class="form-control login-form-input" 
+                        id="age" 
+                        pattern="^[+]?\d+([.]\d+)?$" 
+                        [(ngModel)]="profileInfoEdit.age" 
+                        name="age" #age="ngModel"
+                        placeholder="Current Age"
+                        autocomplete="cc-name"
+                        required
+                        >
+                    </div>
+                    <div class="error error-danger mt-2" *ngIf="(age.touched || f.submitted) && age.invalid">
+                        <div *ngIf="age.errors.required">Please enter Current Sallary of Employee</div>
+                        <div *ngIf="age.errors.pattern">Sallary must be positive number</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="address">Address</label>
+                </div>
+                <div class="col-md-9">
+                    <input 
+                    type="text" 
+                    class="form-control login-form-input" 
+                    id="address" 
+                    [(ngModel)]="profileInfoEdit.address" 
+                    name="address" #address="ngModel"
+                    placeholder="Address"
+                    autocomplete="cc-name"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="jobTitle">Job Title</label>
+                </div>
+                <div class="col-md-9">
+                    <input 
+                    type="text" 
+                    class="form-control login-form-input" 
+                    id="jobTitle" 
+                    [(ngModel)]="profileInfoEdit.jobTitle" 
+                    name="jobTitle" #jobTitle="ngModel"
+                    placeholder="jobTitle"
+                    autocomplete="cc-name"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="currentSallary">Current Sallary</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="d-flex align-items-center">
+                        <input 
+                        type="text" 
+                        class="form-control login-form-input" 
+                        id="currentSallary" 
+                        pattern="^[+]?\d+([.]\d+)?$" 
+                        [(ngModel)]="profileInfoEdit.currentSallary" 
+                        name="currentSallary" #currentSallary="ngModel"
+                        (input)="changeInput()" 
+                        placeholder="Current Sallary"
+                        autocomplete="cc-name"
+                        required
+                        >
+                        <div class="ml-3">
+                            LPA
+                        </div>
+                    </div>
+                    <div class="error error-danger mt-2" *ngIf="(currentSallary.touched || f.submitted) && currentSallary.invalid">
+                        <div *ngIf="currentSallary.errors.required">Please enter Current Sallary of Employee</div>
+                        <div *ngIf="currentSallary.errors.pattern">Sallary must be positive number</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="branchName">Branch Name</label>
+                </div>
+                <div class="col-md-9">
+                    <select class="form-control" [(ngModel)]="profileInfoEdit.branchId" name="branchName">
+                      <option value=2>Kolkata</option>
+                      <option value=3>Bengaluru</option>
+                      <option value=4>Chennai</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row pb-2">
+                <div class="col-md-3">
+                    <label for="designation">Designation</label>
+                </div>
+                <div class="col-md-9">
+                    <select class="form-control" [(ngModel)]="profileInfoEdit.designationId" name="designation">
+                      <option value=2>Branch Manager</option>
+                      <option value=3>Manager</option>
+                      <option value=4>Employee</option>
+                    </select>
+                </div>
+            </div>
+            
+
+            <div class="d-flex justify-content-end">
+                <div class="text-right mr-4">
+                    <button type="button" class="btn btn-secondary fs-14" (click)="modal.close()">Cancel</button>
+                </div>
+    
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary fs-14">Submit</button>
+                </div>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">
+                {{errorMessage}}
+            </div>
+        </form>
+        
+    </div>
+</ng-template>

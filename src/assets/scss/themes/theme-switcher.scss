@@ -1,0 +1,32 @@
+// ===================
+// We can set Theme Varients by changing $theme variable value
+// $theme:1 -- Default Green-Blue
+// $theme:2 -- Pink-Purple 
+//
+// variable 1 - colours variable in theme-colors.scss
+// variable 2 - theme colour type (primary/secondary/tertiary)
+// variable 3 - theme colour name (normal/light/dark/...)
+// ===================
+
+
+$theme: 1;
+
+@if $theme == 1 {
+  $primary-normal: map-deep-get($colors-theme1, 'primary', 'normal');
+  $primary-light: map-deep-get($colors-theme1, 'primary', 'light');
+  $primary-dark: map-deep-get($colors-theme1, 'primary', 'dark');
+
+  $secondary-normal: map-deep-get($colors-theme1, 'secondary', 'normal');
+  $secondary-dark: map-deep-get($colors-theme1, 'secondary', 'dark');
+
+  $tertiary-normal: map-deep-get($colors-theme1, 'tertiary', 'normal');
+} @else if $theme == 2 {
+  $primary-normal: map-deep-get($colors-theme2, 'primary', 'normal');
+  $primary-light: map-deep-get($colors-theme2, 'primary', 'light');
+  $primary-dark: map-deep-get($colors-theme2, 'primary', 'dark');
+
+  $secondary-normal: map-deep-get($colors-theme2, 'secondary', 'normal');
+  $secondary-dark: map-deep-get($colors-theme2, 'secondary', 'dark');
+
+  $tertiary-normal: map-deep-get($colors-theme2, 'tertiary', 'normal');
+}

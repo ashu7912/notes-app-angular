@@ -1,0 +1,45 @@
+
+// Variables for theme dynamic colours
+// Getting colours from defined colour variable in theme-colors.scss
+// variable 1 - colours variable in theme-colors.scss
+// variable 2 - theme colour type (primary/secondary/tertiary)
+// variable 3 - theme colour name (normal/light/dark/...)
+// =================== 
+
+$primary-normal: map-deep-get($colors-theme1, 'primary', 'normal');
+$primary-light: map-deep-get($colors-theme1, 'primary', 'light');
+$primary-dark: map-deep-get($colors-theme1, 'primary', 'dark');
+
+$secondary-normal: map-deep-get($colors-theme1, 'secondary', 'normal');
+$secondary-dark: map-deep-get($colors-theme1, 'secondary', 'dark');
+
+$tertiary-normal: map-deep-get($colors-theme1, 'tertiary', 'normal');
+
+// ===================
+
+
+
+
+// Theme Default Static Colours
+// =================== 
+
+$grey-normal: map-deep-get($colors-default, 'grey', 'normal');
+$grey-normal-100: map-deep-get($colors-default, 'grey', 'normal-100');
+
+$grey-light: map-deep-get($colors-default, 'grey', 'light');
+$grey-light-100: map-deep-get($colors-default, 'grey', 'light-100');
+$grey-light-200: map-deep-get($colors-default, 'grey', 'light-200');
+$grey-light-300: map-deep-get($colors-default, 'grey', 'light-300');
+$grey-light-400: map-deep-get($colors-default, 'grey', 'light-400');
+$grey-light-500: map-deep-get($colors-default, 'grey', 'light-500');
+$grey-light-600: map-deep-get($colors-default, 'grey', 'light-600');
+$grey-light-700: map-deep-get($colors-default, 'grey', 'light-700');
+$grey-light-800: map-deep-get($colors-default, 'grey', 'light-800');
+
+$theme-white: map-deep-get($colors-default, 'white', 'normal');
+$theme-black: map-deep-get($colors-default, 'black', 'normal');
+$theme-danger: map-deep-get($colors-default, 'danger', 'normal');
+
+// ===================
+
+

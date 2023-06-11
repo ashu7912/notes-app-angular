@@ -1,0 +1,30 @@
+@import '../../../utilities.scss';
+
+.list {
+
+    &-table {
+  
+      &-header {
+        background-color: $grey-light;
+        @include font-size(18);
+        font-weight: 600;
+        @include border-bottom(solid, 1px, $grey-light-400);
+  
+        input {
+          @include border-radius(18px);
+        }
+  
+      }
+  
+      &-content {
+        @include height-width(100%, calc(100vh - 230px));
+        overflow: auto;
+      }
+  
+      .row {
+        &:nth-child(odd) {
+          @include bg($grey-light);
+        }
+      }
+    }
+  }

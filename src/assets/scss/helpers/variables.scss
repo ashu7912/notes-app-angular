@@ -1,0 +1,47 @@
+
+// Other Variables
+// ===================
+
+// Spacer variables
+$spacer: 1rem;
+$spacers: (
+  0: 0, 
+  1: ($spacer * .25), 
+  2: ($spacer * .5), 
+  3: $spacer, 
+  4: ($spacer * 1.5), 
+  5: ($spacer * 3), 
+  6: ($spacer * 4), 
+  7: ($spacer * 5), 
+  8: ($spacer * 6.25), 
+  9: ($spacer * 7.5), 
+  10: ($spacer * 9.375)
+);
+
+
+// Font-sizes Variable
+$font-sizes: (
+  1,
+  10,
+  14,
+  18
+);
+
+//Font Family
+$font-family: 'font-icon' !important;
+
+
+// New variables
+
+$primary-one: #1E62AD;
+$primary-two: #30B2E3;
+$primary-three: #2A3890;
+$primary-normal: #4a53ff;
+$white-color: #fff;
+$gray-color-normal: #9C9C9C;
+$error-color: #bf0000;
+$grey-light: #fafafa;
+$grey-light-200: #d7d7d7;
+$grey-light-400: #e1e1e1;
+$grey-light-600: #f2f2f2;
+

@@ -1,0 +1,7 @@
+
+@import '../../../utilities.scss';
+
+.header-section {
+    @include bg($grey-light-600);
+    @include border-bottom(.55px, solid, $grey-light-200)
+  }

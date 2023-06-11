@@ -1,0 +1,113 @@
+@import 'utilities';
+@import 'assets/scss/font-icon';
+@import 'assets/scss/base/reset';
+// Importing Bootstrap SCSS file.
+@import '~bootstrap/scss/bootstrap';
+@import '~ngx-toastr/toastr';
+
+.login-bg{
+  background: linear-gradient(45deg, $primary-three 0%, $primary-one 50%, $primary-two 100%);
+}
+
+.h-100vh{
+  height: 100vh;
+}
+
+.text-white{
+  @include fg($white-color);
+}
+
+.text-gray-normal{
+  @include fg($gray-color-normal);
+}
+
+.text-gray-normal{
+  @include fg($gray-color-normal);
+}
+
+.text-primary-one{
+  @include fg($primary-one)
+}
+
+.text-primary-two {
+  @include fg($primary-two)
+}
+
+.fs-14{
+  font-size: 14px;
+}
+
+.fs-20{
+  font-size: 20px;
+}
+
+.fs-18{
+  font-size: 18px;
+}
+
+.fs-24{
+  font-size: 24px;
+}
+
+.fs-25{
+  font-size: 25px;
+}
+
+.fs-36{
+  font-size: 36px;
+}
+
+.fs-54{
+  font-size: 54px;
+}
+
+.ls-4{
+  letter-spacing: 4px;
+}
+
+.error{
+  text-align: right;
+  font-size: 14px;
+  &-danger{
+    @include fg($error-color);
+  }
+}
+
+.btn{
+  &-primary{
+    @include btn-var($white-color, $primary-one, $primary-two);
+    @include min-width(115px);
+  }
+  &-secondary{
+    @include btn-var($primary-one, $white-color, $primary-two);
+    @include min-width(115px);
+  }
+}
+
+.c_pointer{
+  cursor: pointer;
+}
+
+
+input,
+select,
+textarea {
+  font-size: 14px;
+  @include border(solid, 1px, 1px, 1px, 1px, $gray-color-normal);
+  @include border-radius(4px);
+
+  &:focus {
+    
+    @include border(solid, 1px, 1px, 1px, 1px, $gray-color-normal);
+    @include box-shadow-none;
+  }
+
+}
+
+ 
+
+.modal-w-650 {
+  .modal-dialog {
+      max-width: 650px;
+  }
+}

@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row h-100vh d-flex align-items-center justify-content-center login-bg">
+        <div class="col-3 col-md-4">
+            <div class="login-form-outer">
+                <div class="login-form-top p-6 d-flex justify-content-center">
+                    <div class="login-form-block text-white text-center">
+                        <span class="icon-layers login-form-logo fs-54"></span>
+                        <h5 class="fs-24 pt-3">BRIDGERA</h5>
+                        <p class="fs-14">Human resource management</p>
+                    </div>
+                </div>
+                <div class="login-form-view px-6 pb-7 pt-5 text-center">
+                    <p class="pb-3 fs-20 text-gray-normal ls-4">USER LOGIN</p>
+                    <form action="" ngForm #f="ngForm" (ngSubmit)="f.form.valid && login()">
+                        <div class="form-group pb-2">
+                            <!-- <label for="email">Email address</label> -->
+                            <input 
+                            type="email" 
+                            class="form-control login-form-input" 
+                            id="email" 
+                            [pattern]="emailPattern"
+                            [(ngModel)]="loginObject.email" 
+                            name="email" #email="ngModel"
+                            (input)="changeInput(email)" 
+                            required
+                            placeholder="Email address"
+                            autocomplete="cc-name"
+                            >
+                            <div class="error error-danger mt-2" *ngIf="email.touched && email.invalid">
+                                <div *ngIf="email?.errors?.required">Email is required</div>
+                                <div *ngIf="email?.errors?.pattern">Email is invalid</div>
+                            </div>
+                        </div>
+                        <div class="form-group pb-2">
+                            <!-- <label for="passowrd">Password</label> -->
+                            <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password" 
+                            [(ngModel)]="loginObject.password"
+                            name="password" 
+                            #password="ngModel" 
+                            (input)="changeInput(password)" 
+                            required
+                            placeholder="Password"
+                            >
+                            <div class="error error-danger mt-2" *ngIf="password.invalid && password.touched">
+                                <div *ngIf="password.errors?.required">Password is required</div>
+                            </div>
+                        </div>
+                        <i class="divider"></i>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary fs-14">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

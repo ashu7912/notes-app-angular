@@ -1,0 +1,318 @@
+// ==================
+// Mixin defination
+// @mixin hyphenated-lowercase() {
+//   content: '';
+// }
+
+// @mixin _leading-underscore() {
+//   content: '';
+// }
+// ==================
+//flex box mixins
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin position-v-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin position-hv-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin position-h-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin inline-flex {
+  display: -webkit-inline-box;
+  display: -webkit-border-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+@mixin flex($values) {
+  flex: $values;
+  -webkit-box-flex: $values;
+  -moz-box-flex: $values;
+  -webkit-flex: $values;
+  -ms-flex: $values;
+}
+
+// row | row-reverse | column | column-reverse
+@mixin flex-direction($direction) {
+  flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+  -moz-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+}
+
+// nowrap | wrap | wrap-reverse
+@mixin flex-wrap($wrap) {
+  flex-wrap: $wrap;
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+}
+
+// Flex Direction and Wrap
+@mixin flex-flow($flow) {
+  flex-flow: $flow;
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+}
+
+// Display Order
+@mixin order($val) {
+  order: $val;
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+}
+
+// Flex grow factor
+@mixin flex-grow($grow) {
+  flex-grow: $grow;
+  -webkit-flex-grow: $grow;
+  -moz-flex-grow: $grow;
+  -ms-flex-grow: $grow;
+}
+
+// Flex shrink
+@mixin flex-shrink($shrink) {
+  flex-shrink: $shrink;
+  -webkit-flex-shrink: $shrink;
+  -moz-flex-shrink: $shrink;
+  -ms-flex-shrink: $shrink;
+}
+
+// Flex basis
+@mixin flex-basis($width) {
+  flex-basis: $width;
+  -webkit-flex-basis: $width;
+  -moz-flex-basis: $width;
+  -ms-flex-basis: $width;
+}
+
+// flex-start | flex-end | center | space-between | space-around
+@mixin justify-content($justify) {
+  justify-content: $justify;
+  -webkit-justify-content: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  -ms-flex-pack: $justify;
+}
+
+// flex-start | flex-end | center | space-between | space-around | stretch
+@mixin align-content($align) {
+  align-content: $align;
+  -webkit-align-content: $align;
+  -moz-align-content: $align;
+  -ms-align-content: $align;
+}
+
+// flex-start | flex-end | center | baseline | stretch
+@mixin align-items($align) {
+  align-items: $align;
+  -webkit-align-items: $align;
+  -moz-align-items: $align;
+  -ms-align-items: $align;
+}
+
+// auto | flex-start | flex-end | center | baseline | stretch
+@mixin align-self($align) {
+  align-self: $align;
+  -webkit-align-self: $align;
+  -moz-align-self: $align;
+  -ms-align-self: $align;
+}
+
+// box-sizing
+@mixin box-sizing($box-model) {
+  box-sizing: $box-model;
+  -webkit-box-sizing: $box-model;
+  -moz-box-sizing: $box-model;
+}
+
+// height and width
+@mixin height-width($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin min-width($width) {
+  min-width: $width;
+}
+
+@mixin min-height($height) {
+  min-height: $height;
+}
+
+// font size and line height
+@mixin font-size($size: 12) {
+  font-size: (.0625 * $size) + rem;
+}
+
+@mixin line-height($height: 20) {
+  line-height: (.0625 * $height) + rem;
+}
+
+@mixin fnts-lineh($size: 12, $height: 20) {
+  @include font-size($size);
+  @include line-height($height);
+}
+
+// box shadow
+
+@mixin box-shadow-none {
+  box-shadow: none !important;
+}
+
+// font weight, font size font weight and line height
+@mixin font-weight($weight: 400) {
+  font-weight: $weight;
+}
+
+// mixins for solid/ouline  buttons
+@mixin btn-var($color, $background, $border) {
+  @include fg-bg($color, $background);
+  border-color: $border;
+
+  &:focus,
+  &.focus {
+    @include fg-bg($color, $background);
+    @include box-shadow-none;
+    border-color: lighten($border, 5%);
+    // @include box-shadow(0, 0, 0, 2px, $primary-normal);
+  }
+
+  &:hover {
+    @include fg-bg($color, $background);
+    background: lighten($background, 6%);
+    border-color: lighten($border, 5%);
+    transition: background-color .4s ease;
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    @include fg-bg($color, $background);
+    border-color: lighten($border, 5%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      @include fg-bg($color, $background);
+      border-color: lighten($border, 5%);
+    }
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      @include bg($background);
+      border-color: $border;
+    }
+  }
+
+  &:not(:disabled) {
+    &:active {
+      @include bg($background);
+      border-color: $border;
+    }
+
+    &:active {
+      &:focus {
+        // @include box-shadow(0, 0, 0, 2px, $primary-normal);
+        @include box-shadow-none;
+      }
+    }
+  }
+}
+
+
+// For Horizontal Vertical Flex Center
+@mixin flex-hr-vr-center($ai, $jc) {
+  @include flexbox;
+  @include align-items($ai);
+  @include justify-content($jc);
+}
+
+@mixin border($bst, $bwt, $bwr, $bwb, $bwl, $bclr) {
+  border-color: $bclr;
+  border-style: $bst;
+  border-width: $bwt $bwr $bwb $bwl;
+}
+
+@mixin border-top($bwt, $bst, $bclr) {
+  border-top: $bwt $bst $bclr;
+}
+
+@mixin border-right($bwt, $bst, $bclr) {
+  border-right: $bwt $bst $bclr;
+}
+
+@mixin border-bottom($bwt, $bst, $bclr) {
+  border-bottom: $bwt $bst $bclr;
+}
+
+@mixin border-left($bwt, $bst, $bclr) {
+  border-left: $bwt $bst $bclr;
+}
+
+
+// border radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+
+@mixin fg($color) {
+  color: $color;
+  // color: var(--my-dynamic-background-color);
+}
+
+@mixin bg($color) {
+  background-color: $color;
+}
+
+@mixin fg-bg($color, $bgcolor) {
+  @include fg($color);
+  @include bg($bgcolor);
+}
+
+@mixin gradient($direction, $colors...) {
+  background: -webkit-linear-gradient($direction, $colors);
+  background: -moz-linear-gradient($direction, $colors);
+  background: -o-linear-gradient($direction, $colors);
+  background: linear-gradient($direction, $colors);
+}
+

@@ -1,0 +1,124 @@
+
+// :root {
+//     --primary-normal: #01a887;
+//     --primary-light: #56c2b7;
+//     --primary-dark: #009375;
+
+//     --secondary-normal: #2a3c98;
+//     --secondary-dark: #202d76;
+// }
+
+// :root[theme='admin'] {
+//     --primary-normal: #01a887;
+//     --primary-light: #56c2b7;
+//     --primary-dark: #009375;
+
+//     --secondary-normal: #2a3c98;
+//     --secondary-dark: #202d76;
+
+//     --tertiary-normal: #ec808d;
+// }
+
+// :root[theme='user'] {
+//     --primary-normal: #8b01b2;
+//     --primary-light: #ba4ab8;
+//     --primary-dark: #6a0087;
+
+//     --secondary-normal: #2a3c98;
+//     --secondary-dark: #202776;
+
+//     --tertiary-normal: #ecbf80;
+// }
+
+// Colour Variables
+
+// $colors-theme1 - Variables for colour theme 1
+// ===================
+
+$colors-theme1: (
+  'primary': (
+    'normal': #01a887,
+    'light': #56c2b7,
+    'dark': #009375,
+  ),
+  'secondary': (
+    'normal': #2a3c98,
+    'light': #000080,
+    'dark': #202d76,
+  ),
+  'tertiary': (
+    'normal': #ec808d,
+  ),
+);
+
+// $colors-theme1: (
+//     'primary': (
+//         'normal': var(--primary-normal),
+//         'light': var(--primary-light),
+//         'dark': var(--primary-dark),
+//     ),
+//     'secondary': (
+//         'normal': var(--secondary-normal),
+//         'dark': var(--secondary-dark),
+//     ),
+//     'tertiary': (
+//         'normal': var(--tertiary-normal),
+//     ),
+// );
+
+// ===================
+
+
+
+// $colors-theme2 - Variables for colour theme 2
+// ===================
+
+$colors-theme2: (
+  'primary': (
+    'normal': #8b01b2,
+    'light': #ba4ab8,
+    'dark': #6a0087,
+  ),
+  'secondary': (
+    'normal': #2a3c98,
+    'light': #000080,
+    'dark': #202776,
+  ),
+  'tertiary': (
+    'normal': #ecbf80,
+  ),
+);
+
+// ===================
+
+
+
+// $colors-default - Variables for default static colours
+// ===================
+
+$colors-default: (
+  'grey': (
+    'light': #fafafa,
+    'light-100': #fcfcfc,
+    'light-200': #d7d7d7,
+    'light-300': #e4e4e4,
+    'light-400': #e1e1e1,
+    'light-500': #eee,
+    'light-600': #f2f2f2,
+    'light-700': #f8f9fa,
+    'light-800': #7f7f7f,
+    'normal': #999,
+    'normal-100': #aaa,
+  ),
+  'white': (
+    'normal': #fff
+  ),
+  'black': (
+    'normal': #000
+  ),
+  'danger': (
+    'normal': #f63
+  )
+);
+
+// ===================

@@ -1,0 +1,45 @@
+<div class="px-5 pt-5 d-flex justify-content-between align-items-center">
+    <div class="fs-20 text-primary-two ">
+        {{tableSubHeader}}
+    </div>
+    <div class="d-flex align-items-center">
+        <div class="text-primary-two fs-25">
+            <span *ngIf="this.loggedInUser.branchId == 1">All</span> 
+            Employee's List
+        </div>
+    </div>
+    <!-- <button class="btn btn-primary btn-list-outline btn-list-outline-arrow">Add Role</button> -->
+</div>
+<div class="px-5 pb-3 d-flex text-primary-one fs-18">
+    Total<span *ngIf="this.usersArray.length > 0"> - {{usersArray.length}}</span> 
+</div>
+<div class="list-table pb-3">
+    <ul class="row m-0 list-table-header text-primary-one px-5 py-3 align-items-center">
+        <li class="col-md-1">No</li>
+        <li class="col-md-3">Employee Name</li>
+        <li class="col-md-1 text-center">Branch</li>
+        <li class="col-md-2 text-center">Designation</li>
+        <li class="col-md-2 text-center">Job Title</li>
+        <li class="col-md-2 text-center">Joining Date</li>
+        <li class="col-md-1"></li>
+    </ul>
+    <div class="list-table-content">
+        <ul *ngFor="let user of usersArray; let i = index;" class="row m-0 px-5 py-3 align-items-center">
+            <li class="col-md-1">{{i+1}}</li>
+            <li class="col-md-3">{{user.name}}</li>
+            <li class="col-md-1 text-center">{{user.branchName}}</li>
+            <li class="col-md-2 text-center">{{user.designation}}</li>
+            <li class="col-md-2 text-center">{{user.jobTitle}}</li>
+            <li class="col-md-2 text-center">{{user.joiningDate}}</li>
+            <li class="col-md-1">
+                <!-- <span class="icon-edit c_pointer fs-25 text-primary-one"></span> -->
+                <span class="icon-eye c_pointer fs-25 text-primary-two pl-4" (click)="viewEmployee(user)"></span>
+            </li>
+        </ul>
+        <div class="d-flex mt-4 justify-content-center" *ngIf="usersArray.length == 0">
+            <div class="alert alert-secondary px-6" *ngIf="usersArray.length == 0">
+                Records not found.
+            </div>
+        </div>
+    </div>
+</div>

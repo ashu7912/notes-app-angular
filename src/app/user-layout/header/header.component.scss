@@ -1,0 +1,19 @@
+
+@import '../../../utilities.scss';
+
+.app-header {
+    @include fg($white-color);
+    @include gradient(to right, $primary-one, $primary-two);
+  
+    a {
+      @include fg($white-color);
+    }
+  
+    &-menu {
+      @include flexbox;
+      @include justify-content(space-between);
+      @include align-items(center);
+  
+    }
+  }
+  
